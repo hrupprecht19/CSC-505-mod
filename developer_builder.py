@@ -1,7 +1,7 @@
 """developer_builder.py
 
 Defines a Developer builder that collects traits and prints a formatted summary.
-
+It randomly selects 3 traits from a predefined list.
 Example output:
 Brief Description: This program outlines the key steps required to build an excellent software engineer with specific personality traits.
 Loading traits for developer...
@@ -12,9 +12,15 @@ Trait: Analytical - Driven by a need for data and logic to find the root causes 
 Trait 3 loading...
 Trait: Achiever - Works hard, possesses a great deal of stamina, and takes satisfaction in being productive and busy.
 Total traits included: 3
+
+The traits are based on concepts from StrengthsFinder 2.0 by Tom Rath.
+  References
+ Rath, T. (2007). StrengthsFinder 2.0. Gallup Press.
+
 """
 
 import time
+import random
 from typing import Dict
 
 class Developer:
@@ -52,22 +58,22 @@ class Developer:
 
 
 if __name__ == "__main__":
-    dev = (
-        Developer()
-        .add_trait(
-            "Restorative",
-            "Excellent at problem-solving, immediately noticing what isn't working and persistent in resolving issues."
-        )
-        .add_trait(
-            "Analytical",
-            "Driven by a need for data and logic to find the root causes of problems, rather than simply accepting assumptions."
-        )
-        .add_trait(
-            "Achiever",
-            "Works hard, possesses a great deal of stamina, and takes satisfaction in being productive and busy."
-        )
-        .build()
-    )
+    # Define available traits and pick 3 at random
+    ALL_TRAITS = {
+        "Restorative": "Excellent at problem-solving, immediately noticing what isn't working and persistent in resolving issues.",
+        "Analytical": "Driven by a need for data and logic to find the root causes of problems, rather than simply accepting assumptions.",
+        "Achiever": "Works hard, possesses a great deal of stamina, and takes satisfaction in being productive and busy.",
+        "Empathy": "Understanding others' perspectives and considering their feelings in team settings.",
+        "Learner": "Knowledge acquisition and adaptability and curiosity, deep dives."
+    }
+
+    selected = random.sample(list(ALL_TRAITS.items()), 3)
+    dev = Developer()
+    for name, desc in selected:
+        dev.add_trait(name, desc)
+    dev = dev.build()
+
+    print("Selected traits:", ", ".join(name for name, _ in selected))
 
     # Show traits with a loading effect (0.8s between each by default)
     dev.display_traits_with_loading(delay=0.8)
@@ -75,8 +81,8 @@ if __name__ == "__main__":
     def display_developer_ascii() -> None:
         """Print ASCII-art developer."""
         ascii_man = r"""
-         _
-        /_\
+          _
+         /_\
         (o_o)
          /|\
          / \
@@ -85,14 +91,7 @@ if __name__ == "__main__":
         print("\nShowing developer ASCII art:\n")
         print(ascii_man)
 
-    try:
-        response = input("Is there anything else you think may be needed? ").strip()
-        if response:
-            print("Thanks for the feedback! Noted:", response)
-        else:
-            print("No additional input provided. Goodbye!")
-    except (EOFError, KeyboardInterrupt):
-        print("\nNo input provided. Exiting.")
-
     # Show ASCII art
     display_developer_ascii()
+
+

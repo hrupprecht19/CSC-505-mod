@@ -57,16 +57,24 @@ if __name__ == "__main__":
     dev = (
         Developer()
         .add_trait(
-            "Restorative",
-            "Excellent at problem-solving, immediately noticing what isn't working and persistent in resolving issues."
-        )
-        .add_trait(
             "Analytical",
             "Driven by a need for data and logic to find the root causes of problems, rather than simply accepting assumptions."
         )
         .add_trait(
             "Achiever",
             "Works hard, possesses a great deal of stamina, and takes satisfaction in being productive and busy."
+        )
+        .add_trait(
+            "Empathy",
+            "Understands and considers the feelings and perspectives of others, especially in team settings."
+        )
+        .add_trait(
+            "Restorative",
+            "Excellent at problem-solving, immediately noticing what isn't working and persistent in resolving issues."
+        )
+        .add_trait(
+            "Learner",
+            "Always eager to learn new skills and technologies, and seeks feedback to improve."
         )
         .build()
     )
